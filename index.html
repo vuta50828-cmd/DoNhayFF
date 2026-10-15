@@ -21,10 +21,17 @@
       --ff-cyan: #00f3ff;
       --bg-dark: #080a10;
       --panel-bg: rgba(15, 20, 32, 0.9);
-      --border-glow: rgba(255, 204, 0, 0.3);
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; -webkit-user-select: none; font-family: 'Rajdhani', sans-serif; }
+    * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+      user-select: none; 
+      -webkit-user-select: none; 
+      font-family: 'Rajdhani', sans-serif; 
+      touch-action: manipulation; /* Chặn hoàn toàn lỗi double-tap zoom trên mobile */
+    }
 
     body {
       background-color: var(--bg-dark);
@@ -85,7 +92,6 @@
       gap: 8px;
     }
 
-    /* Grid Thông Số Độ Nhạy */
     .sensi-list {
       display: flex;
       flex-direction: column;
@@ -105,7 +111,6 @@
     .sensi-label { font-size: 0.9rem; font-weight: 600; }
     .sensi-val { font-family: 'Orbitron', sans-serif; font-size: 1rem; color: var(--ff-cyan); font-weight: 800; }
 
-    /* Nút Bắn Highlight */
     .btn-size-box {
       background: linear-gradient(135deg, rgba(255, 0, 51, 0.15), rgba(255, 204, 0, 0.15));
       border: 1px solid var(--ff-red);
@@ -124,7 +129,6 @@
       text-shadow: 0 0 10px var(--ff-yellow);
     }
 
-    /* Mode Selection */
     .mode-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -135,7 +139,7 @@
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.1);
       color: #fff;
-      padding: 8px 4px;
+      padding: 10px 4px;
       border-radius: 6px;
       font-size: 0.75rem;
       font-weight: 700;
@@ -185,7 +189,6 @@
   </header>
 
   <main>
-    <!-- Chọn Lối Chơi -->
     <div class="panel-card">
       <div class="card-title"><i class="fa-solid fa-crosshair"></i> Chế Độ Nhạy</div>
       <div class="mode-grid">
@@ -195,7 +198,6 @@
       </div>
     </div>
 
-    <!-- Kích Thước Nút Bắn -->
     <div class="btn-size-box">
       <div>
         <div style="font-size: 0.75rem; color: #aaa; font-weight: 700;">NÚT BẮN KHUYÊN DÙNG</div>
@@ -204,7 +206,6 @@
       <div class="btn-size-val" id="btnSizeVal">45%</div>
     </div>
 
-    <!-- Danh Sách Độ Nhạy -->
     <div class="panel-card">
       <div class="card-title"><i class="fa-solid fa-sliders"></i> Bảng Thông Số Độ Nhạy</div>
       
@@ -281,7 +282,6 @@
       document.getElementById('btnSizeVal').textContent = getRandom(btnMin, btnMax) + '%';
     }
 
-    // Khởi tạo lần đầu
     generateRandomSensi();
   </script>
 </body>
