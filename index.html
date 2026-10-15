@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="FF Random Sensi">
+  <title>FF RANDOM SENSI & BUTTON SIZE</title>
+
+  <!-- App Icon cho iPhone -->
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23080a10'/><circle cx='50' cy='50' r='35' fill='none' stroke='%23ffcc00' stroke-width='6'/><circle cx='50' cy='50' r='10' fill='%23ff0033'/><line x1='50' y1='10' x2='50' y2='25' stroke='%23ffcc00' stroke-width='6'/><line x1='50' y1='75' x2='50' y2='90' stroke='%23ffcc00' stroke-width='6'/><line x1='10' y1='50' x2='25' y2='50' stroke='%23ffcc00' stroke-width='6'/><line x1='75' y1='50' x2='90' y2='50' stroke='%23ffcc00' stroke-width='6'/></svg>">
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --ff-yellow: #ffcc00;
+      --ff-red: #ff0033;
+      --ff-cyan: #00f3ff;
+      --bg-dark: #080a10;
+      --panel-bg: rgba(15, 20, 32, 0.9);
+      --border-glow: rgba(255, 204, 0, 0.3);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; -webkit-user-select: none; font-family: 'Rajdhani', sans-serif; }
+
+    body {
+      background-color: var(--bg-dark);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+      overflow-x: hidden;
+    }
+
+    header {
+      background: linear-gradient(90deg, #111827, #080a10);
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid var(--ff-yellow);
+      box-shadow: 0 0 10px rgba(255, 204, 0, 0.2);
+    }
+
+    .brand-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      font-weight: 900;
+      color: var(--ff-yellow);
+      letter-spacing: 1px;
+    }
+
+    .brand-sub { font-size: 0.65rem; color: var(--ff-cyan); font-weight: 700; }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 12px;
+      overflow-y: auto;
+    }
+
+    .panel-card {
+      background: var(--panel-bg);
+      border: 1px solid rgba(255, 204, 0, 0.2);
+      border-radius: 12px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .card-title {
+      font-size: 0.85rem;
+      color: var(--ff-yellow);
+      text-transform: uppercase;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Grid Thông Số Độ Nhạy */
+    .sensi-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .sensi-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.04);
+      padding: 8px 12px;
+      border-radius: 8px;
+      border-left: 3px solid var(--ff-yellow);
+    }
+
+    .sensi-label { font-size: 0.9rem; font-weight: 600; }
+    .sensi-val { font-family: 'Orbitron', sans-serif; font-size: 1rem; color: var(--ff-cyan); font-weight: 800; }
+
+    /* Nút Bắn Highlight */
+    .btn-size-box {
+      background: linear-gradient(135deg, rgba(255, 0, 51, 0.15), rgba(255, 204, 0, 0.15));
+      border: 1px solid var(--ff-red);
+      border-radius: 10px;
+      padding: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .btn-size-val {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.4rem;
+      color: var(--ff-yellow);
+      font-weight: 900;
+      text-shadow: 0 0 10px var(--ff-yellow);
+    }
+
+    /* Mode Selection */
+    .mode-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+    }
+
+    .mode-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #fff;
+      padding: 8px 4px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .mode-btn.active {
+      background: rgba(255, 204, 0, 0.2);
+      border-color: var(--ff-yellow);
+      color: var(--ff-yellow);
+    }
+
+    .action-container { padding: 12px; background: var(--bg-dark); }
+
+    .random-btn {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #ffcc00, #ff8800);
+      color: #000;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      box-shadow: 0 0 15px rgba(255, 204, 0, 0.5);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .random-btn:active { transform: scale(0.98); }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div>
+      <div class="brand-title">RANDOM SENSI FF</div>
+      <div class="brand-sub">PRO SENSITIVITY & FIRE BUTTON</div>
+    </div>
+    <i class="fa-solid fa-dice" style="color:var(--ff-yellow); font-size: 1.2rem;"></i>
+  </header>
+
+  <main>
+    <!-- Chọn Lối Chơi -->
+    <div class="panel-card">
+      <div class="card-title"><i class="fa-solid fa-crosshair"></i> Chế Độ Nhạy</div>
+      <div class="mode-grid">
+        <div class="mode-btn active" onclick="setMode('balanced', this)">CÂN BẰNG</div>
+        <div class="mode-btn" onclick="setMode('high', this)">SIÊU NHẠY</div>
+        <div class="mode-btn" onclick="setMode('shotgun', this)">SHOTGUN</div>
+      </div>
+    </div>
+
+    <!-- Kích Thước Nút Bắn -->
+    <div class="btn-size-box">
+      <div>
+        <div style="font-size: 0.75rem; color: #aaa; font-weight: 700;">NÚT BẮN KHUYÊN DÙNG</div>
+        <div style="font-size: 0.9rem; font-weight: 700;">Kích Thước Nút Bắn:</div>
+      </div>
+      <div class="btn-size-val" id="btnSizeVal">45%</div>
+    </div>
+
+    <!-- Danh Sách Độ Nhạy -->
+    <div class="panel-card">
+      <div class="card-title"><i class="fa-solid fa-sliders"></i> Bảng Thông Số Độ Nhạy</div>
+      
+      <div class="sensi-list">
+        <div class="sensi-item">
+          <span class="sensi-label">Nhìn Quanh (Toàn Cảnh)</span>
+          <span class="sensi-val" id="valGeneral">95</span>
+        </div>
+        <div class="sensi-item">
+          <span class="sensi-label">Red Dot Sight</span>
+          <span class="sensi-val" id="valRedDot">90</span>
+        </div>
+        <div class="sensi-item">
+          <span class="sensi-label">Ống Ngắm 2x</span>
+          <span class="sensi-val" id="val2x">88</span>
+        </div>
+        <div class="sensi-item">
+          <span class="sensi-label">Ống Ngắm 4x</span>
+          <span class="sensi-val" id="val4x">85</span>
+        </div>
+        <div class="sensi-item">
+          <span class="sensi-label">Ống Ngắm AWM (Sniper)</span>
+          <span class="sensi-val" id="valSniper">50</span>
+        </div>
+        <div class="sensi-item">
+          <span class="sensi-label">Góc Nhìn (Nhìn)</span>
+          <span class="sensi-val" id="valLook">65</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div class="action-container">
+    <button class="random-btn" onclick="generateRandomSensi()">
+      <i class="fa-solid fa-shuffle"></i> RANDOM ĐỘ NHẠY MỚI
+    </button>
+  </div>
+
+  <script>
+    let currentMode = 'balanced';
+
+    function setMode(mode, element) {
+      if (navigator.vibrate) navigator.vibrate(10);
+      document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+      element.classList.add('active');
+      currentMode = mode;
+      generateRandomSensi();
+    }
+
+    function getRandom(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function generateRandomSensi() {
+      if (navigator.vibrate) navigator.vibrate(20);
+
+      let genMin = 85, genMax = 100;
+      let btnMin = 40, btnMax = 55;
+
+      if (currentMode === 'high') {
+        genMin = 95; genMax = 100;
+        btnMin = 38; btnMax = 48;
+      } else if (currentMode === 'shotgun') {
+        genMin = 98; genMax = 100;
+        btnMin = 45; btnMax = 60;
+      }
+
+      document.getElementById('valGeneral').textContent = getRandom(genMin, genMax);
+      document.getElementById('valRedDot').textContent = getRandom(genMin - 5, genMax);
+      document.getElementById('val2x').textContent = getRandom(80, 98);
+      document.getElementById('val4x').textContent = getRandom(75, 95);
+      document.getElementById('valSniper').textContent = getRandom(35, 65);
+      document.getElementById('valLook').textContent = getRandom(50, 80);
+      document.getElementById('btnSizeVal').textContent = getRandom(btnMin, btnMax) + '%';
+    }
+
+    // Khởi tạo lần đầu
+    generateRandomSensi();
+  </script>
+</body>
+</html>
